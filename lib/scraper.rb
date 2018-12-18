@@ -53,4 +53,16 @@ class Scraper
   end
 
 
+
+  def self.scrape_nysci
+
+    html = open('https://nysci.org/events/week/')
+    doc = Nokogiri::HTML(html)
+
+
+    doc.css("col-md- col-sm-6 col-lg- h3").collect do |event| {
+     title: event.css("a").attribute("href").value }
+    end
+  end
+
 end
